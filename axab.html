@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AXIOMA Project</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            background-color: #0c0d0d;
+            color: #ffffff;
+            font-family: 'Montserrat', sans-serif;
+            margin: 0;
+            padding: 0;
+            text-align: center;
+            overflow-x: hidden; /* Защита от горизонтального скролла из-за большого фона */
+        }
+
+        section {
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+        }
+
+        /* --- НОВЫЙ БОЛЬШОЙ ФОНОВЫЙ ЛОГОТИП AXIOMA --- */
+        .background-logo-container {
+            position: fixed; /* Закреплен при скролле */
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            height: 100vh; /* Занимает всю высоту */
+            width: auto;
+            opacity: 0.15; /* Еле заметный, для глубины */
+            
+            user-select: none;
+            z-index: -1; /* Отправляем на задний план */
+            pointer-events: none; /* Пропускает клики */
+            filter: brightness(1.3) contrast(1.1);
+            /* Эффект свечения сквозь темный фон */
+            mix-blend-mode: screen;
+        }
+
+        /* --- ШАПКА --- */
+        header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            padding: 30px 0;
+            display: flex;
+            justify-content: center;
+            z-index: 100;
+        }
+
+        .header-logo-bk {
+            position: absolute;
+            left: 50px;
+            height: 35px;
+            mix-blend-mode: screen;
+        }
+
+        nav ul {
+            list-style: none;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            gap: 40px;
+        }
+
+        nav a {
+            text-decoration: none;
+            color: #ffffff;
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            opacity: 0.3;
+            transition: 0.4s;
+        }
+
+        nav a.active {
+            opacity: 1;
+        }
+
+        /* --- ГЛАВНЫЙ БЛОК --- */
+        h1 {
+            font-size: 4.5rem; /* Немного увеличил для баланса */
+            margin: 0;
+            font-weight: 700;
+            letter-spacing: 6px;
+        }
+
+        h2 {
+            font-size: 3.2rem;
+            font-weight: 400;
+            color: #bbbbbb;
+            margin: 0;
+            letter-spacing: 6px;
+        }
+
+        .description {
+            font-size: 1.1rem;
+            color: #888;
+            margin-top: 25px;
+            max-width: 650px;
+            line-height: 1.6;
+            letter-spacing: 0.5px;
+        }
+
+        /* --- БЛОК КОНТАКТОВ --- */
+        .contacts-container {
+            display: flex;
+            flex-direction: column;
+            gap: 30px;
+            margin-top: 50px;
+        }
+
+        .contact-item {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            font-size: 1.3rem;
+            color: #ffffff;
+            text-decoration: none;
+            transition: 0.3s;
+            opacity: 0.7;
+            cursor: pointer;
+        }
+
+        .contact-item:hover {
+            opacity: 1;
+            color: #33ff99; /* Фирменный зеленый */
+        }
+
+        .contact-item i {
+            font-size: 2.5rem;
+            width: 50px;
+        }
+
+        /* --- ФУТЕР --- */
+        .footer-text {
+            position: absolute;
+            bottom: 35px;
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 4px;
+            color: #444;
+        }
+
+    </style>
+</head>
+<body>
+
+    <header>
+        <img src="my_logo.png" alt="BK" class="header-logo-bk">
+        <nav>
+            <ul>
+                <li><a href="#home" id="nav-home" class="active">ГЛАВНАЯ</a></li>
+                <li><a href="#contacts" id="nav-contacts">КОНТАКТЫ</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <section id="home">
+        <img src="axioma_logo.png" alt="Axioma Background" class="background-logo-container">
+        
+        <h1>AXIOMA</h1>
+        <h2>PROJECT</h2>
+        <p class="description">
+            Axioma Project – молодой проект, в котором разрабатывается антивирусное ПО, а затем интегрируется в виде ботов мессенджера или в качестве Anti-Spam бота, внедренный в веб-сайт. Основная цель проекта заключена в обеспечении безопасности пользователей.
+        </p>
+        <div class="footer-text">Axioma .apps 2026</div>
+    </section>
+
+    <section id="contacts">
+        <h1>КОНТАКТЫ</h1>
+        <div class="contacts-container">
+            <div class="contact-item" onclick="copyDiscord()">
+                <i class="fab fa-discord"></i>
+                <span id="discord-nick">bytkop</span>
+            </div>
+            <a href="mailto:bytkopov@gmail.com" class="contact-item">
+                <i class="fas fa-envelope"></i>
+                <span>bytkopov@gmail.com</span>
+            </a>
+        </div>
+        <div class="footer-text">Axioma .apps 2026</div>
+    </section>
+
+    <script>
+        // Скрипт подсветки активного пункта меню
+        window.addEventListener('scroll', () => {
+            const homeLink = document.getElementById('nav-home');
+            const contactLink = document.getElementById('nav-contacts');
+            const top = window.scrollY;
+
+            // Порог в половину высоты окна
+            if (top < window.innerHeight / 2) {
+                homeLink.classList.add('active');
+                contactLink.classList.remove('active');
+            } else {
+                homeLink.classList.remove('active');
+                contactLink.classList.add('active');
+            }
+        });
+
+        // Функция копирования Discord
+        function copyDiscord() {
+            const nick = "bytkop";
+            // Современный метод копирования
+            navigator.clipboard.writeText(nick);
+            // Уведомление (можно заменить на всплывашку)
+            alert("Discord ID скопирован: " + nick);
+        }
+    </script>
+
+</body>
+</html>
